@@ -27,6 +27,24 @@ document.addEventListener("DOMContentLoaded", () => {
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
         `;
 
+        // Participants section
+        const participantsSection = document.createElement("div");
+        participantsSection.className = "participants-section";
+        const participantsTitle = document.createElement("h4");
+        participantsTitle.textContent = "Participants";
+        participantsSection.appendChild(participantsTitle);
+
+        const participantsList = document.createElement("ul");
+        participantsList.className = "participants-list";
+        details.participants.forEach((email) => {
+          const li = document.createElement("li");
+          li.textContent = email;
+          participantsList.appendChild(li);
+        });
+        participantsSection.appendChild(participantsList);
+
+        activityCard.appendChild(participantsSection);
+
         activitiesList.appendChild(activityCard);
 
         // Add option to select dropdown
@@ -83,4 +101,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initialize app
   fetchActivities();
+
+  // Add some basic styles for the participants section
+  const style = document.createElement("style");
+  style.textContent = `
+    .activity-card .participants-section {
+        margin-top: 1em;
+        background: #f8f9fa;
+        border-radius: 6px;
+        padding: 0.75em 1em;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+    .activity-card .participants-section h4 {
+        margin: 0 0 0.5em 0;
+        font-size: 1em;
+        color: #333;
+    }
+    .activity-card .participants-list {
+        margin: 0;
+        padding-left: 1.2em;
+    }
+    .activity-card .participants-list li {
+        font-size: 0.95em;
+        color: #555;
+        margin-bottom: 0.2em;
+    }
+    `;
+  document.head.appendChild(style);
 });
